@@ -2,7 +2,12 @@
 'use strict';
 
 angular.module('AssignmentOneModule', [])
-.controller('AssignmentOneController', function ($scope) {
+.controller('AssignmentOneController', AssignmentOneController);
+
+// This approach is to save java script code from minification //
+AssignmentOneController.$inject = ['$scope'];
+    
+function AssignmentOneController($scope){
   $scope.dishes = "";  
   $scope.message = "";
     
@@ -19,5 +24,6 @@ angular.module('AssignmentOneModule', [])
       }
   }
     
-});
+};
+    
 })();
