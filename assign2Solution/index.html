@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+<body ng-app="ShopingCartModule">
+  <div class="container">
+    <h1>Shopping List Check Off</h1>
+
+    <div class="row">
+
+        <!-- To Buy List -->
+        <div class="col-md-6" ng-controller="ShopingCartController as scController">
+            <h2>To Buy:</h2>
+            {{scController.bought.lenght}}
+            <ul>
+                <li ng-repeat="item in scController.cart">Buy {{item.quantity}} {{item.name}}(s) 
+                    <button class="btn btn-default" ng-click="scController.buy($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button>                    
+                </li>
+            </ul>
+            <div ng-if="scController.cart.length < 1" class="emptyMessage">Everything is bought!</div>
+        </div>
+
+        <!-- Already Bought List -->
+        <div class="col-md-6" ng-controller="BoughtController as bController">
+            <h2>Already Bought:</h2>
+            <ul>
+                <li ng-repeat="item in bController.bought">Bought {{item.quantity}} {{item.name}}(s) </li>
+            </ul>
+            <div ng-if="bController.bought.length < 1" class="emptyMessage">Nothing bought yet.</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
