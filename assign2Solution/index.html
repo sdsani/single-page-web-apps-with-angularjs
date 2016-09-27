@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
   </head>
-<body ng-app="ShopingCartModule">
+<body ng-app="ShoppingListCheckOff">
   <div class="container">
     <h1>Shopping List Check Off</h1>
 
     <div class="row">
 
         <!-- To Buy List -->
-        <div class="col-md-6" ng-controller="ShopingCartController as scController">
+        <div class="col-md-6" ng-controller="ToBuyShoppingController as scController">
             <h2>To Buy:</h2>
             {{scController.bought.lenght}}
             <ul>
@@ -27,7 +27,7 @@
         </div>
 
         <!-- Already Bought List -->
-        <div class="col-md-6" ng-controller="BoughtController as bController">
+        <div class="col-md-6" ng-controller="AlreadyBoughtShoppingController as bController">
             <h2>Already Bought:</h2>
             <ul>
                 <li ng-repeat="item in bController.bought">Bought {{item.quantity}} {{item.name}}(s) </li>

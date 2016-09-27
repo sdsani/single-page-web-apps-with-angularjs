@@ -1,52 +1,37 @@
 (function () {
 
     'use strict';
-    angular.module('ShopingCartModule', [])
-    .controller('ShopingCartController', ShopingCartController)
-    .controller('BoughtController', BoughtController)
-    .provider('SCartService', ShopingCartServiceProvider)
-    .config(Config);
+    angular.module('ShoppingListCheckOff', [])
+    .controller('ToBuyShoppingController', ToBuyShoppingController)
+    .controller('AlreadyBoughtShoppingController', AlreadyBoughtShoppingController)
+    .service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
-    Config.$inject = ['SCartServiceProvider'];    
-    function Config(SCartServiceProvider){
-       SCartServiceProvider.shopingCart = [
+    ToBuyShoppingController.$inject = ['ShoppingListCheckOffService'];
+    function ToBuyShoppingController(ShoppingListCheckOffService){
+        var controller = this;
+        
+        controller.cart   = ShoppingListCheckOffService.getCart();        
+        controller.buy = function(index){
+            ShoppingListCheckOffService.buy(index);
+        }
+    }
+    
+    AlreadyBoughtShoppingController.$inject = ['ShoppingListCheckOffService'];
+    function AlreadyBoughtShoppingController(ShoppingListCheckOffService){
+        var bController = this;        
+        bController.bought = ShoppingListCheckOffService.getBought();
+    }
+    
+    function ShoppingListCheckOffService(){
+        
+        var service = this;
+        var cart   = [
           { name: "Milk",quantity: "2"},
           { name: "Donuts",quantity: "200"},
           { name: "Cookies", quantity: "300"},
           { name: "Chocolate", quantity: "5"},
           { name: "Tea", quantity: "4"}
-        ];
-    }
-    
-    ShopingCartController.$inject = ['SCartService'];
-    function ShopingCartController(SCartService){
-        var controller = this;
-        
-        controller.cart   = SCartService.getCart();        
-        controller.buy = function(index){
-            SCartService.buy(index);
-        }
-    }
-    
-    BoughtController.$inject = ['SCartService'];
-    function BoughtController(SCartService){
-        var bController = this;        
-        bController.bought = SCartService.getBought();
-    }
-    
-    function ShopingCartServiceProvider(){
-        var provider = this;
-        provider.shopingCart = [];
-        
-        provider.$get = function(){
-            return new SCartService(provider.shopingCart);
-        }
-    }
-    
-    function SCartService(shopingCart){
-        
-        var service = this;
-        var cart   = shopingCart;
+            ];
         var bought = [];
         
         service.buy = function(index){
