@@ -1,0 +1,9 @@
+
+<!--<div class="loader">-->
+<h3>{{myHeader}}</h3>    
+<ol>
+    <li ng-repeat="item in inItems">
+        {{item.name}}
+        <button ng-click="deleteItem({index: $index});">Delete from this list</button>
+    </li>
+</ol>
